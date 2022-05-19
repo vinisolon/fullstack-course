@@ -1,0 +1,13 @@
+package com.vinisolon.fullstackcourse;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FullstackCourseApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FullstackCourseApplication.class, args);
+	}
+
+}
