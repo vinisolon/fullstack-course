@@ -1,19 +1,15 @@
 package com.vinisolon.fullstackcourse;
 
-import com.vinisolon.fullstackcourse.domain.Categoria;
-import com.vinisolon.fullstackcourse.domain.Cidade;
-import com.vinisolon.fullstackcourse.domain.Estado;
-import com.vinisolon.fullstackcourse.domain.Produto;
-import com.vinisolon.fullstackcourse.repositories.CategoriaRepository;
-import com.vinisolon.fullstackcourse.repositories.CidadeRepository;
-import com.vinisolon.fullstackcourse.repositories.EstadoRepository;
-import com.vinisolon.fullstackcourse.repositories.ProdutoRepository;
+import com.vinisolon.fullstackcourse.domain.*;
+import com.vinisolon.fullstackcourse.domain.enums.TipoCliente;
+import com.vinisolon.fullstackcourse.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class FullstackCourseApplication implements CommandLineRunner {
@@ -30,26 +26,30 @@ public class FullstackCourseApplication implements CommandLineRunner {
 	private CidadeRepository cidadeRepository;
 	@Autowired
 	private EstadoRepository estadoRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 		// Produtos e categorias
-		Categoria cat1 = new Categoria(null, "Informática");
-		Categoria cat2 = new Categoria(null, "Escritório");
+		Categoria categoriaInformatica = new Categoria(null, "Informática");
+		Categoria categoriaEscritorio = new Categoria(null, "Escritório");
 
-		Produto p1 = new Produto(null, "Computador", 2000.00);
-		Produto p2 = new Produto(null, "Impressora", 800.00);
-		Produto p3 = new Produto(null, "Mouse", 80.00);
+		Produto produtoComputador = new Produto(null, "Computador", 2000.00);
+		Produto produtoImpressora = new Produto(null, "Impressora", 800.00);
+		Produto produtoMouse = new Produto(null, "Mouse", 80.00);
 
-		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		cat2.getProdutos().add(p2);
+		categoriaInformatica.getProdutos().addAll(Arrays.asList(produtoComputador, produtoImpressora, produtoMouse));
+		categoriaEscritorio.getProdutos().add(produtoImpressora);
 
-		p1.getCategorias().add(cat1);
-		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
-		p3.getCategorias().add(cat1);
+		produtoComputador.getCategorias().add(categoriaInformatica);
+		produtoImpressora.getCategorias().addAll(Arrays.asList(categoriaInformatica, categoriaEscritorio));
+		produtoMouse.getCategorias().add(categoriaInformatica);
 
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		categoriaRepository.saveAll(Arrays.asList(categoriaInformatica, categoriaEscritorio));
+		produtoRepository.saveAll(Arrays.asList(produtoComputador, produtoImpressora, produtoMouse));
 
 		// Estados e cidades
 		Estado sp = new Estado(null, "São Paulo", "SP");
@@ -64,5 +64,21 @@ public class FullstackCourseApplication implements CommandLineRunner {
 
 		estadoRepository.saveAll(Arrays.asList(sp, mg));
 		cidadeRepository.saveAll(Arrays.asList(campinas, saoPaulo, uberlandia));
+
+		// Clientes e endereços
+		Cliente clienteMaria = new Cliente(null, "Maria Silva", "maria@gmail.com",
+				"36378912377", TipoCliente.PESSOA_FISICA);
+
+		clienteMaria.getTelefone().addAll(Arrays.asList("27363323", "93838393"));
+
+		Endereco endereco1 = new Endereco(null, "Rua Flores", "300", "Apto 303",
+				"Jardim", "38220-834", clienteMaria, campinas);
+		Endereco endereco2 = new Endereco(null, "Avenida Matos", "105", "Sala 800",
+				"Centro", "38777-012", clienteMaria, saoPaulo);
+
+		clienteMaria.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
+
+		clienteRepository.saveAll(List.of(clienteMaria));
+		enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2));
 	}
 }
