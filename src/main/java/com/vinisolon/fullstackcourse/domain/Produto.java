@@ -1,5 +1,6 @@
 package com.vinisolon.fullstackcourse.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,6 +34,7 @@ public class Produto implements Serializable {
     private String nome;
     private Double preco;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
             name = "produto_categoria",
