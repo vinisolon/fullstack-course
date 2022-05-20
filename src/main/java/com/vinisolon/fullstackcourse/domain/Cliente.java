@@ -1,5 +1,6 @@
 package com.vinisolon.fullstackcourse.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vinisolon.fullstackcourse.domain.enums.TipoCliente;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class Cliente implements Serializable {
     private String documento;
     private Integer tipo;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private Set<Endereco> enderecos = new HashSet<>();
 
