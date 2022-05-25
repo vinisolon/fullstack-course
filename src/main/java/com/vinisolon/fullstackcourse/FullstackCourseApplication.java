@@ -36,6 +36,8 @@ public class FullstackCourseApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -43,19 +45,19 @@ public class FullstackCourseApplication implements CommandLineRunner {
 		Categoria categoriaInformatica = new Categoria(null, "Informática");
 		Categoria categoriaEscritorio = new Categoria(null, "Escritório");
 
-		Produto produtoComputador = new Produto(null, "Computador", 2000.00);
-		Produto produtoImpressora = new Produto(null, "Impressora", 800.00);
-		Produto produtoMouse = new Produto(null, "Mouse", 80.00);
+		Produto produto1 = new Produto(null, "Computador", 2000.00);
+		Produto produto2 = new Produto(null, "Impressora", 800.00);
+		Produto produto3 = new Produto(null, "Mouse", 80.00);
 
-		categoriaInformatica.getProdutos().addAll(Arrays.asList(produtoComputador, produtoImpressora, produtoMouse));
-		categoriaEscritorio.getProdutos().add(produtoImpressora);
+		categoriaInformatica.getProdutos().addAll(Arrays.asList(produto1, produto2, produto3));
+		categoriaEscritorio.getProdutos().add(produto2);
 
-		produtoComputador.getCategorias().add(categoriaInformatica);
-		produtoImpressora.getCategorias().addAll(Arrays.asList(categoriaInformatica, categoriaEscritorio));
-		produtoMouse.getCategorias().add(categoriaInformatica);
+		produto1.getCategorias().add(categoriaInformatica);
+		produto2.getCategorias().addAll(Arrays.asList(categoriaInformatica, categoriaEscritorio));
+		produto3.getCategorias().add(categoriaInformatica);
 
 		categoriaRepository.saveAll(Arrays.asList(categoriaInformatica, categoriaEscritorio));
-		produtoRepository.saveAll(Arrays.asList(produtoComputador, produtoImpressora, produtoMouse));
+		produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
 
 		// Estados e cidades
 		Estado sp = new Estado(null, "São Paulo", "SP");
@@ -103,5 +105,19 @@ public class FullstackCourseApplication implements CommandLineRunner {
 
 		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
 		pagamentoRepository.saveAll(Arrays.asList(pagamento1, pagamento2));
+
+		// ItemPedido
+		ItemPedido itemPedido1 = new ItemPedido(pedido1, produto1, 1, 2000., 0.);
+		ItemPedido itemPedido2 = new ItemPedido(pedido1, produto3, 2, 80., 0.);
+		ItemPedido itemPedido3 = new ItemPedido(pedido2, produto2, 1, 800., 100.0);
+
+		pedido1.getItens().addAll(Arrays.asList(itemPedido1, itemPedido2));
+		pedido2.getItens().add(itemPedido3);
+
+		produto1.getItens().add(itemPedido1);
+		produto2.getItens().add(itemPedido3);
+		produto3.getItens().add(itemPedido2);
+
+		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3));
 	}
 }

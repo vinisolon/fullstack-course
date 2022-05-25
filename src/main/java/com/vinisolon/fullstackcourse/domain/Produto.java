@@ -1,22 +1,14 @@
 package com.vinisolon.fullstackcourse.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -43,9 +35,21 @@ public class Produto implements Serializable {
     )
     private List<Categoria> categorias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itens = new HashSet<>();
+
     public Produto(Long id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public List<Pedido> getPedidos() {
+        List<Pedido> pedidosDosItens = new ArrayList<>();
+
+        for (ItemPedido itemPedido : itens)
+            pedidosDosItens.add(itemPedido.getPedido());
+
+        return pedidosDosItens;
     }
 }

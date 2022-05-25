@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -34,6 +36,9 @@ public class Pedido implements Serializable {
     // Necessário para salvar pedido/pagamento
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itens = new HashSet<>();
 
     public Pedido(Long id, Date dataRealizacao, Cliente cliente, Endereco enderecoDeEntrega) {
         this.id = id;
