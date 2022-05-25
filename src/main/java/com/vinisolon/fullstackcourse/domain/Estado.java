@@ -1,6 +1,7 @@
 package com.vinisolon.fullstackcourse.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +33,7 @@ public class Estado implements Serializable {
     @Column(length = 2)
     private String sigla;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "estado")
     private Set<Cidade> cidades = new HashSet<>();
 

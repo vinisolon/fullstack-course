@@ -1,5 +1,6 @@
 package com.vinisolon.fullstackcourse.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vinisolon.fullstackcourse.domain.enums.EstadoPagamento;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class Pagamento implements Serializable {
     private Long id;
     private Integer estado;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId // id entidade Pagamento = id entidade Pedido
