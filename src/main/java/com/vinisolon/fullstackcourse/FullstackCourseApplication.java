@@ -1,6 +1,7 @@
 package com.vinisolon.fullstackcourse;
 
 import com.vinisolon.fullstackcourse.domain.*;
+import com.vinisolon.fullstackcourse.domain.enums.EstadoPagamento;
 import com.vinisolon.fullstackcourse.domain.enums.TipoCliente;
 import com.vinisolon.fullstackcourse.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +32,10 @@ public class FullstackCourseApplication implements CommandLineRunner {
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,7 +75,7 @@ public class FullstackCourseApplication implements CommandLineRunner {
 		Cliente clienteMaria = new Cliente(null, "Maria Silva", "maria@gmail.com",
 				"36378912377", TipoCliente.PESSOA_FISICA);
 
-		clienteMaria.getTelefone().addAll(Arrays.asList("27363323", "93838393"));
+		clienteMaria.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 
 		Endereco endereco1 = new Endereco(null, "Rua Flores", "300", "Apto 303",
 				"Jardim", "38220-834", clienteMaria, campinas);
@@ -80,5 +86,22 @@ public class FullstackCourseApplication implements CommandLineRunner {
 
 		clienteRepository.saveAll(List.of(clienteMaria));
 		enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2));
+
+		// Pedidos e pagamentos
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+		Pedido pedido1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), clienteMaria, endereco1);
+		Pedido pedido2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), clienteMaria, endereco2);
+
+		Pagamento pagamento1 = new PagamentoCartao(null, EstadoPagamento.QUITADO, pedido1, 6);
+		pedido1.setPagamento(pagamento1);
+
+		Pagamento pagamento2 = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, pedido2, sdf.parse("20/10/2017 00:00"), null);
+		pedido2.setPagamento(pagamento2);
+
+		clienteMaria.getPedidos().addAll(Arrays.asList(pedido1, pedido2));
+
+		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
+		pagamentoRepository.saveAll(Arrays.asList(pagamento1, pagamento2));
 	}
 }

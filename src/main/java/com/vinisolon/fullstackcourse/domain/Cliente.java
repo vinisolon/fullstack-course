@@ -1,5 +1,6 @@
 package com.vinisolon.fullstackcourse.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vinisolon.fullstackcourse.domain.enums.TipoCliente;
 import lombok.EqualsAndHashCode;
@@ -35,7 +36,13 @@ public class Cliente implements Serializable {
 
     @ElementCollection
     @CollectionTable(name = "telefone")
-    private Set<String> telefone = new HashSet<>();
+    @Column(name = "telefone")
+    private Set<String> telefones = new HashSet<>();
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "cliente")
+    @Column(name = "pedido")
+    private Set<Pedido> pedidos = new HashSet<>();
 
     public Cliente(Long id, String nome, String email, String documento, TipoCliente tipo) {
         this.id = id;
