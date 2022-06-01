@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(value = "/api/pedidos/")
+@RequestMapping(value = "/api/pedidos")
 public class PedidoResource {
 
     @Autowired
@@ -21,12 +21,12 @@ public class PedidoResource {
     @Autowired
     private ExportToPDF exportToPDF;
 
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> findPedidoById(@PathVariable Long id) {
         return ResponseEntity.ok().body(pedidoService.findPedidoById(id));
     }
 
-    @GetMapping(value = "export/pdf/{id}")
+    @GetMapping(value = "/export/pdf/{id}")
     public void exportPedidoPdf(@PathVariable Long id, HttpServletResponse response) throws IOException {
         exportToPDF.export(pedidoService.getPedidoPdfExportDto(id), response);
     }

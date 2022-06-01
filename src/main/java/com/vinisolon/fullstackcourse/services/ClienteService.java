@@ -16,4 +16,5 @@ public class ClienteService {
         return clienteRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado! ID: " + id));
     }
+
 }

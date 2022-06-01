@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "api/clientes/")
+@RequestMapping(value = "api/clientes")
 public class ClienteResources {
 
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping(value = "{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> findClienteById(@PathVariable Long id) {
         return ResponseEntity.ok().body(clienteService.findClienteById(id));
     }
+
 }
