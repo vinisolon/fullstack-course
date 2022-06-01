@@ -1,6 +1,7 @@
 package com.vinisolon.fullstackcourse.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,5 +48,13 @@ public class Pedido implements Serializable {
         this.dataRealizacao = dataRealizacao;
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+    @JsonIgnore
+    public double getValorTotalPedido() {
+        double valorTotalPedido = 0.;
+        for (ItemPedido item : itens)
+            valorTotalPedido += item.getPreco() * item.getQuantidade();
+        return valorTotalPedido;
     }
 }
