@@ -32,4 +32,10 @@ public class CategoriaResource {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping(value = "/update")
+    public ResponseEntity<Void> updateCategoria(@RequestBody Categoria categoriaToUpdate) {
+        categoriaService.updateCategoria(categoriaToUpdate);
+        return ResponseEntity.noContent().build();
+    }
+
 }
