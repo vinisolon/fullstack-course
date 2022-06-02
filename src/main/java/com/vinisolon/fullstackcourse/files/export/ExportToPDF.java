@@ -16,6 +16,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Locale;
 
 @Service
@@ -109,20 +110,28 @@ public class ExportToPDF {
         document.add(table);
     }
 
-    public void export(PedidoPdfExportDTO pedidoToPdf, HttpServletResponse response) throws IOException {
+    public void export(PedidoPdfExportDTO pedidoToPdf, HttpServletResponse response) {
         try (Document document = new Document(PageSize.A4)) {
             setResponseHeader(response, pedidoToPdf.getNumeroPedido().toString() + ".pdf");
-
             PdfWriter.getInstance(document, response.getOutputStream());
             document.open();
-
             setHeaderImage(document);
             setHeaderTable(document, pedidoToPdf);
             setContentTable(document, pedidoToPdf);
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println(e.getMessage());
-            throw new IOException("Erro ao gerar PDF!");
+        }
+    }
+
+    public void exportBase64(PedidoPdfExportDTO pedidoToPdf, HttpServletResponse response) {
+        try (Document document = new Document(PageSize.A4)) {
+            PdfWriter.getInstance(document, Base64.getEncoder().wrap(response.getOutputStream()));
+            document.open();
+            setHeaderImage(document);
+            setHeaderTable(document, pedidoToPdf);
+            setContentTable(document, pedidoToPdf);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

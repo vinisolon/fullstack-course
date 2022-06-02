@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/api/pedidos")
@@ -26,9 +25,10 @@ public class PedidoResource {
         return ResponseEntity.ok().body(pedidoService.findPedidoById(id));
     }
 
-    @GetMapping(value = "/export/pdf/{id}")
-    public void exportPedidoPdf(@PathVariable Long id, HttpServletResponse response) throws IOException {
+    @GetMapping(value = "/export/pdf/{id}", produces = "application/pdf")
+    public void exportPedidoPdf(@PathVariable Long id, HttpServletResponse response) {
         exportToPDF.export(pedidoService.getPedidoPdfExportDto(id), response);
+//        exportToPDF.exportBase64(pedidoService.getPedidoPdfExportDto(id), response);
     }
 
 }
