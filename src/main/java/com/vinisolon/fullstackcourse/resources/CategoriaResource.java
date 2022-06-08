@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/categorias")
@@ -15,6 +16,11 @@ public class CategoriaResource {
 
     @Autowired
     private CategoriaService categoriaService;
+
+    @GetMapping
+    public ResponseEntity<List<?>> findAllCategorias() {
+        return ResponseEntity.ok().body(categoriaService.findAll());
+    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findCategoriaById(@PathVariable Long id) {
@@ -35,6 +41,12 @@ public class CategoriaResource {
     @PutMapping(value = "/update")
     public ResponseEntity<Void> updateCategoria(@RequestBody Categoria categoriaToUpdate) {
         categoriaService.updateCategoria(categoriaToUpdate);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Void> deleteCategoria(@PathVariable Long id) {
+        categoriaService.deleteCategoriaById(id);
         return ResponseEntity.noContent().build();
     }
 
