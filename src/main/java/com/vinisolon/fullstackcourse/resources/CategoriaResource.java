@@ -1,7 +1,7 @@
 package com.vinisolon.fullstackcourse.resources;
 
 import com.vinisolon.fullstackcourse.domain.Categoria;
-import com.vinisolon.fullstackcourse.domain.dto.CategoriaDTO;
+import com.vinisolon.fullstackcourse.dto.CategoriaDTO;
 import com.vinisolon.fullstackcourse.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

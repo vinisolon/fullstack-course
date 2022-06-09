@@ -1,8 +1,8 @@
 package com.vinisolon.fullstackcourse.resources;
 
 import com.vinisolon.fullstackcourse.domain.Cliente;
-import com.vinisolon.fullstackcourse.domain.dto.ClienteDTO;
-import com.vinisolon.fullstackcourse.domain.dto.ClienteInsertDTO;
+import com.vinisolon.fullstackcourse.dto.ClienteDTO;
+import com.vinisolon.fullstackcourse.dto.ClienteInsertDTO;
 import com.vinisolon.fullstackcourse.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

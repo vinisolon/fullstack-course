@@ -1,4 +1,4 @@
-package com.vinisolon.fullstackcourse.domain.dto;
+package com.vinisolon.fullstackcourse.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

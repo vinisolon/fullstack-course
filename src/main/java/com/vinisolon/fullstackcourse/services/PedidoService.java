@@ -2,8 +2,8 @@ package com.vinisolon.fullstackcourse.services;
 
 import com.vinisolon.fullstackcourse.domain.ItemPedido;
 import com.vinisolon.fullstackcourse.domain.Pedido;
-import com.vinisolon.fullstackcourse.domain.dto.PedidoPdfExportDTO;
-import com.vinisolon.fullstackcourse.domain.dto.ProdutoPedidoPdfExportDTO;
+import com.vinisolon.fullstackcourse.dto.PedidoPdfExportDTO;
+import com.vinisolon.fullstackcourse.dto.ProdutoPedidoPdfExportDTO;
 import com.vinisolon.fullstackcourse.repositories.PedidoRepository;
 import com.vinisolon.fullstackcourse.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

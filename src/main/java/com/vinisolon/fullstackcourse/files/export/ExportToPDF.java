@@ -7,8 +7,8 @@ import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import com.vinisolon.fullstackcourse.domain.dto.PedidoPdfExportDTO;
-import com.vinisolon.fullstackcourse.domain.dto.ProdutoPedidoPdfExportDTO;
+import com.vinisolon.fullstackcourse.dto.PedidoPdfExportDTO;
+import com.vinisolon.fullstackcourse.dto.ProdutoPedidoPdfExportDTO;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;

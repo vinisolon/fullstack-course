@@ -1,7 +1,7 @@
 package com.vinisolon.fullstackcourse.services;
 
 import com.vinisolon.fullstackcourse.domain.Categoria;
-import com.vinisolon.fullstackcourse.domain.dto.CategoriaDTO;
+import com.vinisolon.fullstackcourse.dto.CategoriaDTO;
 import com.vinisolon.fullstackcourse.repositories.CategoriaRepository;
 import com.vinisolon.fullstackcourse.services.exceptions.DataIntegrityException;
 import com.vinisolon.fullstackcourse.services.exceptions.ObjectNotFoundException;
