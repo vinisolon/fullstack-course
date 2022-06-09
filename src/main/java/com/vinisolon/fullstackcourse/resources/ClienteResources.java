@@ -1,13 +1,17 @@
 package com.vinisolon.fullstackcourse.resources;
 
+import com.vinisolon.fullstackcourse.domain.Cliente;
 import com.vinisolon.fullstackcourse.domain.dto.ClienteDTO;
+import com.vinisolon.fullstackcourse.domain.dto.ClienteInsertDTO;
 import com.vinisolon.fullstackcourse.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,6 +29,17 @@ public class ClienteResources {
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findClienteById(@PathVariable Long id) {
         return ResponseEntity.ok().body(clienteService.findClienteById(id));
+    }
+
+    @PostMapping(value = "/insert")
+    public ResponseEntity<Void> insertCliente(@Valid @RequestBody ClienteInsertDTO clienteToInsert) {
+        Cliente clienteCreated = clienteService.insertCliente(clienteToInsert);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(clienteCreated.getId())
+                .toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value = "/update")

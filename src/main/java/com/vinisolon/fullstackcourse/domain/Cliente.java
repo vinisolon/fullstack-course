@@ -29,13 +29,13 @@ public class Cliente implements Serializable {
     private String documento;
     private Integer tipo;
 
-    @OneToMany(mappedBy = "cliente")
-    private Set<Endereco> enderecos = new HashSet<>();
-
     @ElementCollection
     @CollectionTable(name = "telefone")
     @Column(name = "telefone")
     private Set<String> telefones = new HashSet<>();
+
+    @OneToMany(mappedBy = "cliente")
+    private Set<Endereco> enderecos = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
