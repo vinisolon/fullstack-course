@@ -1,8 +1,6 @@
 package com.vinisolon.fullstackcourse.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vinisolon.fullstackcourse.domain.enums.TipoCliente;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -49,7 +47,7 @@ public class Cliente implements Serializable {
         this.nome = nome;
         this.email = email;
         this.documento = documento;
-        this.tipo = tipo.getCodigo();
+        this.tipo = (tipo == null ? null : tipo.getCodigo());
     }
 
     public TipoCliente getTipo() {
@@ -59,4 +57,5 @@ public class Cliente implements Serializable {
     public void setTipo(TipoCliente tipo) {
         this.tipo = tipo.getCodigo();
     }
+
 }
