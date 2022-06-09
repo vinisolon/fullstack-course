@@ -3,9 +3,10 @@ package com.vinisolon.fullstackcourse.services;
 import com.vinisolon.fullstackcourse.domain.Categoria;
 import com.vinisolon.fullstackcourse.domain.dto.CategoriaDTO;
 import com.vinisolon.fullstackcourse.repositories.CategoriaRepository;
-import com.vinisolon.fullstackcourse.services.exceptions.DataIntegrityViolationException;
+import com.vinisolon.fullstackcourse.services.exceptions.DataIntegrityException;
 import com.vinisolon.fullstackcourse.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -45,8 +46,8 @@ public class CategoriaService {
         findCategoriaById(id);
         try {
             categoriaRepository.deleteById(id);
-        } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException("Não é possível deletar categorias associadas a produto(s)!");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível deletar categorias associadas a produto(s)!");
         }
     }
 

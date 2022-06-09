@@ -1,6 +1,6 @@
 package com.vinisolon.fullstackcourse.resources.exceptions;
 
-import com.vinisolon.fullstackcourse.services.exceptions.DataIntegrityViolationException;
+import com.vinisolon.fullstackcourse.services.exceptions.DataIntegrityException;
 import com.vinisolon.fullstackcourse.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +26,8 @@ public class ResourceExceptionHandler {
         return ResponseEntity.status(error.getStatus()).body(error);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<StandartError> dataIntegrityViolation(DataIntegrityViolationException exception, HttpServletRequest request) {
+    @ExceptionHandler(DataIntegrityException.class)
+    public ResponseEntity<StandartError> dataIntegrityViolation(DataIntegrityException exception, HttpServletRequest request) {
         StandartError error = new StandartError(
                 HttpStatus.BAD_REQUEST.value(),
                 exception.getMessage(),
