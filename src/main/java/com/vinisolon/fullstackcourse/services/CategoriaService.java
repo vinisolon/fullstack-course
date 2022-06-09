@@ -1,6 +1,7 @@
 package com.vinisolon.fullstackcourse.services;
 
 import com.vinisolon.fullstackcourse.domain.Categoria;
+import com.vinisolon.fullstackcourse.domain.dto.CategoriaDTO;
 import com.vinisolon.fullstackcourse.repositories.CategoriaRepository;
 import com.vinisolon.fullstackcourse.services.exceptions.DataIntegrityViolationException;
 import com.vinisolon.fullstackcourse.services.exceptions.ObjectNotFoundException;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriaService {
@@ -15,8 +17,11 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public List<Categoria> findAll() {
-        return categoriaRepository.findAll();
+    public List<?> findAll() {
+        return categoriaRepository.findAll()
+                .stream()
+                .map(CategoriaDTO::new)
+                .collect(Collectors.toList());
     }
 
     public Categoria findCategoriaById(Long id) {
