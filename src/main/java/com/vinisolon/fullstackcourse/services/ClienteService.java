@@ -3,9 +3,9 @@ package com.vinisolon.fullstackcourse.services;
 import com.vinisolon.fullstackcourse.domain.Cidade;
 import com.vinisolon.fullstackcourse.domain.Cliente;
 import com.vinisolon.fullstackcourse.domain.Endereco;
+import com.vinisolon.fullstackcourse.domain.enums.TipoCliente;
 import com.vinisolon.fullstackcourse.dto.ClienteDTO;
 import com.vinisolon.fullstackcourse.dto.ClienteInsertDTO;
-import com.vinisolon.fullstackcourse.domain.enums.TipoCliente;
 import com.vinisolon.fullstackcourse.repositories.ClienteRepository;
 import com.vinisolon.fullstackcourse.repositories.EnderecoRepository;
 import com.vinisolon.fullstackcourse.services.exceptions.DataIntegrityException;
@@ -61,7 +61,7 @@ public class ClienteService {
         try {
             clienteRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não é possível deletar porque existe entidades relacionadas!");
+            throw new DataIntegrityException("Não é possível deletar cliente associado a pedido(s)!");
         }
     }
 

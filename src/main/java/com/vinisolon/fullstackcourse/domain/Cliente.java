@@ -34,7 +34,7 @@ public class Cliente implements Serializable {
     @Column(name = "telefone")
     private Set<String> telefones = new HashSet<>();
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private Set<Endereco> enderecos = new HashSet<>();
 
     @JsonIgnore
