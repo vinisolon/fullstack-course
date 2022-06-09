@@ -32,13 +32,13 @@ public class CategoriaService {
                 .orElseThrow(() -> new ObjectNotFoundException("Categoria não encontrada! ID: " + id));
     }
 
-    public Categoria insertCategoria(Categoria categoriaToInsert) {
-        return categoriaRepository.save(categoriaToInsert);
+    public Categoria insertCategoria(CategoriaDTO categoriaToInsert) {
+        return categoriaRepository.save(categoriaFromDto(categoriaToInsert));
     }
 
-    public void updateCategoria(Categoria categoriaToUpdate) {
+    public void updateCategoria(CategoriaDTO categoriaToUpdate) {
         findCategoriaById(categoriaToUpdate.getId());
-        categoriaRepository.save(categoriaToUpdate);
+        categoriaRepository.save(categoriaFromDto(categoriaToUpdate));
     }
 
     public void deleteCategoriaById(Long id) {
@@ -53,6 +53,10 @@ public class CategoriaService {
     public Page<?> findAllCategoriasPaged(Integer page, Integer pageSize, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.Direction.valueOf(direction), orderBy);
         return categoriaRepository.findAll(pageRequest).map(CategoriaDTO::new);
+    }
+
+    private Categoria categoriaFromDto(CategoriaDTO categoriaDTO) {
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
     }
 
 }

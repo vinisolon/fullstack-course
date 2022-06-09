@@ -1,6 +1,7 @@
 package com.vinisolon.fullstackcourse.resources;
 
 import com.vinisolon.fullstackcourse.domain.Categoria;
+import com.vinisolon.fullstackcourse.domain.dto.CategoriaDTO;
 import com.vinisolon.fullstackcourse.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class CategoriaResource {
     }
 
     @PostMapping(value = "/insert")
-    public ResponseEntity<Void> insertCategoria(@RequestBody Categoria categoriaToInsert) {
+    public ResponseEntity<Void> insertCategoria(@Valid @RequestBody CategoriaDTO categoriaToInsert) {
         Categoria categoriaCreated = categoriaService.insertCategoria(categoriaToInsert);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -40,7 +42,7 @@ public class CategoriaResource {
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Void> updateCategoria(@RequestBody Categoria categoriaToUpdate) {
+    public ResponseEntity<Void> updateCategoria(@Valid @RequestBody CategoriaDTO categoriaToUpdate) {
         categoriaService.updateCategoria(categoriaToUpdate);
         return ResponseEntity.noContent().build();
     }
