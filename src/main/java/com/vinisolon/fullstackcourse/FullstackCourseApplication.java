@@ -44,6 +44,12 @@ public class FullstackCourseApplication implements CommandLineRunner {
 		// Produtos e categorias
 		Categoria categoriaInformatica = new Categoria(null, "Informática");
 		Categoria categoriaEscritorio = new Categoria(null, "Escritório");
+		Categoria categoriaHigiene = new Categoria(null, "Higiene");
+		Categoria categoriaLimpeza = new Categoria(null, "Limpeza");
+		Categoria categoriaCozinha = new Categoria(null, "Cozinha");
+		Categoria categoriaAutomoveis = new Categoria(null, "Automoveis");
+		Categoria categoriaJardim = new Categoria(null, "Jardim");
+		Categoria categoriaJogos = new Categoria(null, "Jogos");
 
 		Produto produto1 = new Produto(null, "Computador", 2000.00);
 		Produto produto2 = new Produto(null, "Impressora", 800.00);
@@ -56,7 +62,8 @@ public class FullstackCourseApplication implements CommandLineRunner {
 		produto2.getCategorias().addAll(Arrays.asList(categoriaInformatica, categoriaEscritorio));
 		produto3.getCategorias().add(categoriaInformatica);
 
-		categoriaRepository.saveAll(Arrays.asList(categoriaInformatica, categoriaEscritorio));
+		categoriaRepository.saveAll(Arrays.asList(categoriaInformatica, categoriaEscritorio, categoriaHigiene,
+				categoriaLimpeza, categoriaCozinha, categoriaAutomoveis, categoriaJardim, categoriaJogos));
 		produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
 
 		// Estados e cidades
