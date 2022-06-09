@@ -34,9 +34,9 @@ public class ClienteService {
     }
 
     public void updateCliente(ClienteDTO clienteToUpdate) {
-        Cliente existing = findClienteById(clienteToUpdate.getId());
-        Cliente toUpdate = clienteFromDto(clienteToUpdate);
-        updateClienteData(toUpdate, existing);
+        Cliente toUpdate = findClienteById(clienteToUpdate.getId());
+        Cliente newData = clienteFromDto(clienteToUpdate);
+        updateClienteData(toUpdate, newData);
         clienteRepository.save(toUpdate);
     }
 
@@ -58,9 +58,9 @@ public class ClienteService {
         return new Cliente(dto.getId(), dto.getNome(), dto.getEmail(), null, null);
     }
 
-    private void updateClienteData(Cliente toUpdate, Cliente existing) {
-        toUpdate.setDocumento(existing.getDocumento());
-        toUpdate.setTipo(existing.getTipo());
+    private void updateClienteData(Cliente toUpdate, Cliente newData) {
+        toUpdate.setNome(newData.getNome());
+        toUpdate.setEmail(newData.getEmail());
     }
 
 }
