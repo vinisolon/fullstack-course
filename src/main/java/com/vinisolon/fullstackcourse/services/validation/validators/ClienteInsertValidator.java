@@ -2,9 +2,11 @@ package com.vinisolon.fullstackcourse.services.validation.validators;
 
 import com.vinisolon.fullstackcourse.domain.enums.TipoCliente;
 import com.vinisolon.fullstackcourse.dto.ClienteInsertDTO;
+import com.vinisolon.fullstackcourse.repositories.ClienteRepository;
 import com.vinisolon.fullstackcourse.resources.exceptions.FieldMessage;
 import com.vinisolon.fullstackcourse.services.validation.annotations.ClienteInsert;
 import com.vinisolon.fullstackcourse.services.validation.utils.DocumentosBR;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -12,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteInsertDTO> {
+
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Override
     public void initialize(ClienteInsert constraintAnnotation) {
@@ -21,6 +26,9 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
     @Override
     public boolean isValid(ClienteInsertDTO clienteInsertDTO, ConstraintValidatorContext constraintValidatorContext) {
         List<FieldMessage> errors = new ArrayList<>();
+
+        if (clienteRepository.findByEmail(clienteInsertDTO.getEmail()) != null)
+            errors.add(new FieldMessage("email", "E-mail já existe"));
 
         // CPF
         if (clienteInsertDTO.getTipo().equals(TipoCliente.PESSOA_FISICA.getCodigo())
