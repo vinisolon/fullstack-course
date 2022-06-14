@@ -1,6 +1,7 @@
 package com.vinisolon.fullstackcourse.dto;
 
 import com.vinisolon.fullstackcourse.domain.Cliente;
+import com.vinisolon.fullstackcourse.services.validation.annotations.ClienteUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 
     private static final long serialVersionUID = 79164435734028584L;
