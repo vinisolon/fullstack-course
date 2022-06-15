@@ -33,13 +33,13 @@ public class CategoriaService {
                 .orElseThrow(() -> new ObjectNotFoundException("Categoria não encontrada! ID: " + id));
     }
 
-    public Categoria insertCategoria(CategoriaDTO categoriaToInsert) {
-        return categoriaRepository.save(categoriaFromDto(categoriaToInsert));
+    public Categoria insertCategoria(CategoriaDTO categoria2Insert) {
+        return categoriaRepository.save(categoriaFromDto(categoria2Insert));
     }
 
-    public void updateCategoria(CategoriaDTO categoriaToUpdate) {
-        Categoria toUpdate = findCategoriaById(categoriaToUpdate.getId());
-        Categoria newData = categoriaFromDto(categoriaToUpdate);
+    public void updateCategoria(CategoriaDTO categoria2Update) {
+        Categoria toUpdate = findCategoriaById(categoria2Update.getId());
+        Categoria newData = categoriaFromDto(categoria2Update);
         updateCategoriaData(toUpdate, newData);
         categoriaRepository.save(toUpdate);
     }

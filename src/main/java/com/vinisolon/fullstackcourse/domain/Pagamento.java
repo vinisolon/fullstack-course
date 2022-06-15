@@ -1,6 +1,7 @@
 package com.vinisolon.fullstackcourse.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.vinisolon.fullstackcourse.domain.enums.EstadoPagamento;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,10 +11,14 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
+// Informa que a classe pagamento terá um campo adicional chamado @Type. Será utilizado na inserção de pedidos para "instanciação" do pagamento
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@type")
 // Anotação usada para mapear herança
-@Inheritance(strategy = InheritanceType.JOINED) // Cria uma tabela para cada tipo de pagamento
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Cria um 'tabelão' e seta nulo nos atributos que não são do seu tipo
+// JOINED: Cria uma tabela para cada tipo de pagamento
+@Inheritance(strategy = InheritanceType.JOINED)
+// SINGLE_TABLE: Cria um 'tabelão' e seta nulo nos atributos que não são do seu tipo
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -45,4 +50,5 @@ public class Pagamento implements Serializable {
     public void setEstado(EstadoPagamento estado) {
         this.estado = estado.getCodigo();
     }
+
 }

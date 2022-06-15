@@ -1,13 +1,14 @@
 package com.vinisolon.fullstackcourse.domain;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.vinisolon.fullstackcourse.domain.enums.EstadoPagamento;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 
+@JsonTypeName("cartao")
 @Entity
 @Getter
 @Setter
@@ -22,4 +23,5 @@ public class PagamentoCartao extends Pagamento {
         super(id, estado, pedido);
         this.numeroDeParcelas = numeroDeParcelas;
     }
+
 }

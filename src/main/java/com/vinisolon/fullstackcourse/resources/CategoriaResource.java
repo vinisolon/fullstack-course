@@ -31,8 +31,8 @@ public class CategoriaResource {
     }
 
     @PostMapping(value = "/insert")
-    public ResponseEntity<Void> insertCategoria(@Valid @RequestBody CategoriaDTO categoriaToInsert) {
-        Categoria categoriaCreated = categoriaService.insertCategoria(categoriaToInsert);
+    public ResponseEntity<Void> insertCategoria(@Valid @RequestBody CategoriaDTO categoria2Insert) {
+        Categoria categoriaCreated = categoriaService.insertCategoria(categoria2Insert);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -42,8 +42,8 @@ public class CategoriaResource {
     }
 
     @PutMapping(value = "/update")
-    public ResponseEntity<Void> updateCategoria(@Valid @RequestBody CategoriaDTO categoriaToUpdate) {
-        categoriaService.updateCategoria(categoriaToUpdate);
+    public ResponseEntity<Void> updateCategoria(@Valid @RequestBody CategoriaDTO categoria2Update) {
+        categoriaService.updateCategoria(categoria2Update);
         return ResponseEntity.noContent().build();
     }
 

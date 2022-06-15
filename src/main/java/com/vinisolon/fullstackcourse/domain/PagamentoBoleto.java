@@ -1,6 +1,7 @@
 package com.vinisolon.fullstackcourse.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.vinisolon.fullstackcourse.domain.enums.EstadoPagamento;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import java.util.Date;
 
+@JsonTypeName("boleto")
 @Entity
 @Getter
 @Setter
@@ -27,4 +29,5 @@ public class PagamentoBoleto extends Pagamento {
         this.dataVencimento = dataVencimento;
         this.dataPagamento = dataPagamento;
     }
+
 }
