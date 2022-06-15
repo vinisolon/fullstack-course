@@ -1,4 +1,4 @@
-package com.vinisolon.fullstackcourse.files.export;
+package com.vinisolon.fullstackcourse.services.export2pdf;
 
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
@@ -7,8 +7,8 @@ import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import com.vinisolon.fullstackcourse.dto.PedidoPdfExportDTO;
-import com.vinisolon.fullstackcourse.dto.ProdutoPedidoPdfExportDTO;
+import com.vinisolon.fullstackcourse.dto.ResumoPedidoDTO;
+import com.vinisolon.fullstackcourse.dto.ProdutoResumoPedidoDTO;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ import java.util.Base64;
 import java.util.Locale;
 
 @Service
-public class ExportToPDF {
+public class ExportResumoPedidoPDF {
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private final NumberFormat df = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
@@ -44,7 +44,7 @@ public class ExportToPDF {
         document.add(logo);
     }
 
-    private void setHeaderTable(Document document, PedidoPdfExportDTO peditoToPdf) {
+    private void setHeaderTable(Document document, ResumoPedidoDTO peditoToPdf) {
         PdfPTable table = new PdfPTable(3);
         table.setSpacingBefore(15);
         table.setWidthPercentage(100f);
@@ -80,7 +80,7 @@ public class ExportToPDF {
         document.add(table);
     }
 
-    private void setContentTable(Document document, PedidoPdfExportDTO pedidoToPdf) {
+    private void setContentTable(Document document, ResumoPedidoDTO pedidoToPdf) {
         PdfPTable table = new PdfPTable(3);
         table.setSpacingBefore(15);
         table.setWidthPercentage(100f);
@@ -98,7 +98,7 @@ public class ExportToPDF {
 
         Font font = getFontInstance(FontFactory.HELVETICA, 12, Color.BLACK);
 
-        for (ProdutoPedidoPdfExportDTO produto : pedidoToPdf.getProdutosPedido()) {
+        for (ProdutoResumoPedidoDTO produto : pedidoToPdf.getProdutosPedido()) {
             cell.setPhrase(new Phrase(produto.getNomeProduto(), font));
             table.addCell(cell);
             cell.setPhrase(new Phrase(produto.getQuantidadeProduto().toString() + (produto.getQuantidadeProduto() > 1 ? " itens" : " item"), font));
@@ -110,7 +110,7 @@ public class ExportToPDF {
         document.add(table);
     }
 
-    public void export(PedidoPdfExportDTO pedidoToPdf, HttpServletResponse response) {
+    public void export(ResumoPedidoDTO pedidoToPdf, HttpServletResponse response) {
         try (Document document = new Document(PageSize.A4)) {
             setResponseHeader(response, pedidoToPdf.getNumeroPedido().toString() + ".pdf");
             PdfWriter.getInstance(document, response.getOutputStream());
@@ -123,7 +123,7 @@ public class ExportToPDF {
         }
     }
 
-    public void exportBase64(PedidoPdfExportDTO pedidoToPdf, HttpServletResponse response) {
+    public void exportBase64(ResumoPedidoDTO pedidoToPdf, HttpServletResponse response) {
         try (Document document = new Document(PageSize.A4)) {
             PdfWriter.getInstance(document, Base64.getEncoder().wrap(response.getOutputStream()));
             document.open();

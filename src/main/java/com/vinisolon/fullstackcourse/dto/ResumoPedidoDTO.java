@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PedidoPdfExportDTO {
+public class ResumoPedidoDTO {
 
     private String nomeCliente;
     private String documentoCliente;
@@ -18,13 +18,13 @@ public class PedidoPdfExportDTO {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date dataRealizacaoPedido;
     private Double valorTotalPedido;
-    List<ProdutoPedidoPdfExportDTO> produtosPedido = new ArrayList<>();
+    List<ProdutoResumoPedidoDTO> produtosPedido = new ArrayList<>();
 
-    public PedidoPdfExportDTO(String nomeCliente,
-                              String documentoCliente,
-                              Long numeroPedido,
-                              Date dataRealizacaoPedido,
-                              Double valorTotalPedido) {
+    public ResumoPedidoDTO(String nomeCliente,
+                           String documentoCliente,
+                           Long numeroPedido,
+                           Date dataRealizacaoPedido,
+                           Double valorTotalPedido) {
         this.nomeCliente = nomeCliente;
         this.documentoCliente = documentoCliente;
         this.numeroPedido = numeroPedido;
@@ -32,7 +32,7 @@ public class PedidoPdfExportDTO {
         this.valorTotalPedido = valorTotalPedido;
     }
 
-    public void setEachProduto(ProdutoPedidoPdfExportDTO produtoDTO) {
+    public void setEachProduto(ProdutoResumoPedidoDTO produtoDTO) {
         produtosPedido.add(produtoDTO);
     }
 

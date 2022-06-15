@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ProdutoPedidoPdfExportDTO {
+public class ProdutoResumoPedidoDTO {
 
     private String nomeProduto;
     private Integer quantidadeProduto;

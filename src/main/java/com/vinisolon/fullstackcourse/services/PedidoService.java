@@ -4,8 +4,8 @@ import com.vinisolon.fullstackcourse.domain.ItemPedido;
 import com.vinisolon.fullstackcourse.domain.PagamentoBoleto;
 import com.vinisolon.fullstackcourse.domain.Pedido;
 import com.vinisolon.fullstackcourse.domain.enums.EstadoPagamento;
-import com.vinisolon.fullstackcourse.dto.PedidoPdfExportDTO;
-import com.vinisolon.fullstackcourse.dto.ProdutoPedidoPdfExportDTO;
+import com.vinisolon.fullstackcourse.dto.ResumoPedidoDTO;
+import com.vinisolon.fullstackcourse.dto.ProdutoResumoPedidoDTO;
 import com.vinisolon.fullstackcourse.repositories.ItemPedidoRepository;
 import com.vinisolon.fullstackcourse.repositories.PagamentoRepository;
 import com.vinisolon.fullstackcourse.repositories.PedidoRepository;
@@ -44,15 +44,15 @@ public class PedidoService {
                 .orElseThrow(() -> new ObjectNotFoundException("Pedido não encontado! ID: " + id));
     }
 
-    public PedidoPdfExportDTO getPedidoPdfExportDto(Long idPedido) {
+    public ResumoPedidoDTO getPedidoPdfExportDto(Long idPedido) {
         return pedidoToPedidoPdfExport(
                 pedidoRepository.findById(idPedido)
                         .orElseThrow(() -> new ObjectNotFoundException("Pedido não encontado! ID: " + idPedido))
         );
     }
 
-    private PedidoPdfExportDTO pedidoToPedidoPdfExport(Pedido pedido) {
-        PedidoPdfExportDTO pedidoToPdf = new PedidoPdfExportDTO(
+    private ResumoPedidoDTO pedidoToPedidoPdfExport(Pedido pedido) {
+        ResumoPedidoDTO pedidoToPdf = new ResumoPedidoDTO(
                 pedido.getCliente().getNome(),
                 pedido.getCliente().getDocumento(),
                 pedido.getId(),
@@ -62,7 +62,7 @@ public class PedidoService {
 
         for (ItemPedido item : pedido.getItens())
             pedidoToPdf.setEachProduto(
-                    new ProdutoPedidoPdfExportDTO(
+                    new ProdutoResumoPedidoDTO(
                             item.getProduto().getNome(),
                             item.getQuantidade(),
                             item.getPreco()

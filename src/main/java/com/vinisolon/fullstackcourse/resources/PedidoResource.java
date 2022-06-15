@@ -1,7 +1,7 @@
 package com.vinisolon.fullstackcourse.resources;
 
 import com.vinisolon.fullstackcourse.domain.Pedido;
-import com.vinisolon.fullstackcourse.files.export.ExportToPDF;
+import com.vinisolon.fullstackcourse.services.export2pdf.ExportResumoPedidoPDF;
 import com.vinisolon.fullstackcourse.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class PedidoResource {
     @Autowired
     private PedidoService pedidoService;
     @Autowired
-    private ExportToPDF exportToPDF;
+    private ExportResumoPedidoPDF exportToPDF;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findPedidoById(@PathVariable Long id) {
