@@ -1,8 +1,8 @@
 package com.vinisolon.fullstackcourse.resources;
 
 import com.vinisolon.fullstackcourse.domain.Pedido;
-import com.vinisolon.fullstackcourse.services.export2pdf.ExportResumoPedidoPDF;
 import com.vinisolon.fullstackcourse.services.PedidoService;
+import com.vinisolon.fullstackcourse.services.export2pdf.ExportResumoPedidoPDF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +18,7 @@ public class PedidoResource {
 
     @Autowired
     private PedidoService pedidoService;
+
     @Autowired
     private ExportResumoPedidoPDF exportToPDF;
 

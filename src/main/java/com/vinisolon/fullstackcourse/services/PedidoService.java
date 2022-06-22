@@ -4,8 +4,8 @@ import com.vinisolon.fullstackcourse.domain.ItemPedido;
 import com.vinisolon.fullstackcourse.domain.PagamentoBoleto;
 import com.vinisolon.fullstackcourse.domain.Pedido;
 import com.vinisolon.fullstackcourse.domain.enums.EstadoPagamento;
-import com.vinisolon.fullstackcourse.dto.ResumoPedidoDTO;
 import com.vinisolon.fullstackcourse.dto.ProdutoResumoPedidoDTO;
+import com.vinisolon.fullstackcourse.dto.ResumoPedidoDTO;
 import com.vinisolon.fullstackcourse.repositories.ItemPedidoRepository;
 import com.vinisolon.fullstackcourse.repositories.PagamentoRepository;
 import com.vinisolon.fullstackcourse.repositories.PedidoRepository;
@@ -22,22 +22,22 @@ public class PedidoService {
     private PedidoRepository pedidoRepository;
 
     @Autowired
-    ClienteService clienteService;
+    private ClienteService clienteService;
 
     @Autowired
-    EnderecoService enderecoService;
+    private EnderecoService enderecoService;
 
     @Autowired
-    BoletoService boletoService;
+    private BoletoService boletoService;
 
     @Autowired
-    ProdutoService produtoService;
+    private ProdutoService produtoService;
 
     @Autowired
-    PagamentoRepository pagamentoRepository;
+    private PagamentoRepository pagamentoRepository;
 
     @Autowired
-    ItemPedidoRepository itemPedidoRepository;
+    private ItemPedidoRepository itemPedidoRepository;
 
     public Pedido findPedidoById(Long id) {
         return pedidoRepository.findById(id)

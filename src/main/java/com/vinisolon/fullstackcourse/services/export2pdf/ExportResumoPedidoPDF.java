@@ -7,8 +7,8 @@ import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import com.vinisolon.fullstackcourse.dto.ResumoPedidoDTO;
 import com.vinisolon.fullstackcourse.dto.ProdutoResumoPedidoDTO;
+import com.vinisolon.fullstackcourse.dto.ResumoPedidoDTO;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,9 @@ import java.util.Locale;
 
 @Service
 public class ExportResumoPedidoPDF {
+
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
     private final NumberFormat df = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 
     private void setResponseHeader(HttpServletResponse response, String fileName) {
