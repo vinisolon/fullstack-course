@@ -9,6 +9,8 @@ import lombok.Setter;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity
 @Getter
@@ -54,6 +56,18 @@ public class ItemPedido implements Serializable {
 
     public double getSubTotal() {
         return (this.preco - this.desconto) * this.quantidade;
+    }
+
+    @Override
+    public String toString() {
+        final NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        final StringBuffer sb = new StringBuffer();
+        sb.append(getProduto().getNome());
+        sb.append(", qnt ").append(getQuantidade());
+        sb.append(", valor un ").append(nf.format(getPreco()));
+        sb.append(", subtotal ").append(nf.format(getSubTotal()));
+        sb.append("\n");
+        return sb.toString();
     }
 
 }
