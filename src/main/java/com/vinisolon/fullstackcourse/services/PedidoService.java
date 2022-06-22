@@ -9,6 +9,7 @@ import com.vinisolon.fullstackcourse.dto.ResumoPedidoDTO;
 import com.vinisolon.fullstackcourse.repositories.ItemPedidoRepository;
 import com.vinisolon.fullstackcourse.repositories.PagamentoRepository;
 import com.vinisolon.fullstackcourse.repositories.PedidoRepository;
+import com.vinisolon.fullstackcourse.services.email.EmailService;
 import com.vinisolon.fullstackcourse.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,9 @@ public class PedidoService {
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     public Pedido findPedidoById(Long id) {
         return pedidoRepository.findById(id)
@@ -97,6 +101,8 @@ public class PedidoService {
         Pedido pedidoCreated = pedidoRepository.save(pedido2Insert);
         pagamentoRepository.save(pedido2Insert.getPagamento());
         itemPedidoRepository.saveAll(pedido2Insert.getItens());
+
+        emailService.sendOrderConfirmationEmail(pedidoCreated);
 
         return pedidoCreated;
     }
