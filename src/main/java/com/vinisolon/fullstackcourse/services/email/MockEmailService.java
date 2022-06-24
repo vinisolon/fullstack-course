@@ -1,18 +1,15 @@
 package com.vinisolon.fullstackcourse.services.email;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
 
+@Slf4j
 public class MockEmailService extends AbstractEmailService {
-
-    private static final Logger LOG = LoggerFactory.getLogger(MockEmailService.class);
 
     @Override
     public void sendEmail(SimpleMailMessage msg) {
-        LOG.info("Simulando envio de e-mail...");
-        LOG.info(msg.toString());
-        LOG.info("E-mail enviado!");
+        log.info("Simulando envio de e-mail da confirmação do pedido...");
+        log.info("\n{}", msg.toString());
     }
 
 }
