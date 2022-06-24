@@ -9,6 +9,7 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.vinisolon.fullstackcourse.dto.ProdutoResumoPedidoDTO;
 import com.vinisolon.fullstackcourse.dto.ResumoPedidoDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Locale;
 
+@Slf4j
 @Service
 public class ExportResumoPedidoPDF {
 
@@ -40,10 +42,16 @@ public class ExportResumoPedidoPDF {
         return font;
     }
 
-    private void setHeaderImage(Document document) throws IOException {
-        Image logo = Image.getInstance("./images/logo-tenda-pedido-pdf.jpg");
-        logo.setAlignment(Element.ALIGN_CENTER);
-        document.add(logo);
+    private void setHeaderImage(Document document) {
+        String imgPath = "./images/logo-tenda-pedido-pdf.penes";
+        try {
+            Image logo = Image.getInstance(imgPath);
+            logo.setAlignment(Element.ALIGN_CENTER);
+            document.add(logo);
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.warn("Não foi possível localizar o arquivo em {}", imgPath);
+        }
     }
 
     private void setHeaderTable(Document document, ResumoPedidoDTO peditoToPdf) {
