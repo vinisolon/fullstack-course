@@ -21,12 +21,12 @@ public class CategoriaResource {
     private CategoriaService categoriaService;
 
     @GetMapping
-    public ResponseEntity<List<?>> findAllCategorias() {
+    public ResponseEntity<List<CategoriaDTO>> findAllCategorias() {
         return ResponseEntity.ok().body(categoriaService.findAllCategorias());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findCategoriaById(@PathVariable Long id) {
+    public ResponseEntity<Categoria> findCategoriaById(@PathVariable Long id) {
         return ResponseEntity.ok().body(categoriaService.findCategoriaById(id));
     }
 
@@ -54,7 +54,7 @@ public class CategoriaResource {
     }
 
     @GetMapping(value = "/paged")
-    public ResponseEntity<Page<?>> findAllCategoriasPaged(
+    public ResponseEntity<Page<CategoriaDTO>> findAllCategoriasPaged(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "pageSize", defaultValue = "24") Integer pageSize,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction,

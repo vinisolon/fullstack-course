@@ -21,7 +21,7 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public List<?> findAllCategorias() {
+    public List<CategoriaDTO> findAllCategorias() {
         return categoriaRepository.findAll()
                 .stream()
                 .map(CategoriaDTO::new)
@@ -53,7 +53,7 @@ public class CategoriaService {
         }
     }
 
-    public Page<?> findAllCategoriasPaged(Integer page, Integer pageSize, String direction, String orderBy) {
+    public Page<CategoriaDTO> findAllCategoriasPaged(Integer page, Integer pageSize, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.Direction.valueOf(direction), orderBy);
         return categoriaRepository.findAll(pageRequest).map(CategoriaDTO::new);
     }

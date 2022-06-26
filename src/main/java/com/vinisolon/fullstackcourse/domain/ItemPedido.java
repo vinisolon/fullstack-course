@@ -61,7 +61,7 @@ public class ItemPedido implements Serializable {
     @Override
     public String toString() {
         final NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        final StringBuffer sb = new StringBuffer();
+        final StringBuilder sb = new StringBuilder();
         sb.append(getProduto().getNome());
         sb.append(", qnt ").append(getQuantidade());
         sb.append(", valor un ").append(nf.format(getPreco()));

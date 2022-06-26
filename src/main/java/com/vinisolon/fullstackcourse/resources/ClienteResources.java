@@ -22,12 +22,12 @@ public class ClienteResources {
     private ClienteService clienteService;
 
     @GetMapping
-    public ResponseEntity<List<?>> findAllClientes() {
+    public ResponseEntity<List<ClienteDTO>> findAllClientes() {
         return ResponseEntity.ok().body(clienteService.findAllClientes());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findClienteById(@PathVariable Long id) {
+    public ResponseEntity<Cliente> findClienteById(@PathVariable Long id) {
         return ResponseEntity.ok().body(clienteService.findClienteById(id));
     }
 
@@ -55,7 +55,7 @@ public class ClienteResources {
     }
 
     @GetMapping(value = "/paged")
-    public ResponseEntity<Page<?>> findAllClientesPaged(
+    public ResponseEntity<Page<ClienteDTO>> findAllClientesPaged(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "pageSize", defaultValue = "24") Integer pageSize,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction,

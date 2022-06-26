@@ -1,7 +1,12 @@
 package com.vinisolon.fullstackcourse.services.validation.utils;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 // Fonte: https://gist.github.com/adrianoluis/5043397d378ae506d87366abb0ab4e30
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DocumentosBR {
+
     // CPF
     private static final int[] weightCPF = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 

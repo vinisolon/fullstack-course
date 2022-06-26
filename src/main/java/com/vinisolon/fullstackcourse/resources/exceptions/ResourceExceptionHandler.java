@@ -39,7 +39,7 @@ public class ResourceExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ValidationError> MethodArgumentNotValid(MethodArgumentNotValidException exception, HttpServletRequest request) {
+    public ResponseEntity<ValidationError> methodArgumentNotValid(MethodArgumentNotValidException exception, HttpServletRequest request) {
         ValidationError error = new ValidationError(
                 HttpStatus.BAD_REQUEST.value(),
                 "Bean validation failed",

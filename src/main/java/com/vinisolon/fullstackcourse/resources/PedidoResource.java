@@ -23,14 +23,13 @@ public class PedidoResource {
     private ExportResumoPedidoPDF exportToPDF;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findPedidoById(@PathVariable Long id) {
+    public ResponseEntity<Pedido> findPedidoById(@PathVariable Long id) {
         return ResponseEntity.ok().body(pedidoService.findPedidoById(id));
     }
 
     @GetMapping(value = "/export/pdf/{id}", produces = "application/pdf")
     public void exportPedidoPdf(@PathVariable Long id, HttpServletResponse response) {
         exportToPDF.export(pedidoService.getPedidoPdfExportDto(id), response);
-//        exportToPDF.exportBase64(pedidoService.getPedidoPdfExportDto(id), response);
     }
 
     @PostMapping(value = "/insert")

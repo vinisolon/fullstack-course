@@ -23,7 +23,7 @@ public class ProdutoService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public List<?> findAllProdutos() {
+    public List<Produto> findAllProdutos() {
         return produtoRepository.findAll();
     }
 
@@ -32,10 +32,9 @@ public class ProdutoService {
                 .orElseThrow(() -> new ObjectNotFoundException("Produto não encontrado! ID: " + id));
     }
 
-    public Page<?> searchProdutosPaged(String nome, List<Long> idsCategorias, Integer page, Integer pageSize, String direction, String orderBy) {
+    public Page<ProdutoDTO> searchProdutosPaged(String nome, List<Long> idsCategorias, Integer page, Integer pageSize, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.Direction.valueOf(direction), orderBy);
         List<Categoria> categorias = categoriaRepository.findAllById(idsCategorias);
-//        return produtoRepository.searchProdutosPaged(nome, categorias, pageRequest).map(ProdutoDTO::new);
         return produtoRepository.searchProdutosPaged(nome, categorias, pageRequest).map(ProdutoDTO::new);
     }
 

@@ -1,5 +1,7 @@
 package com.vinisolon.fullstackcourse.resources;
 
+import com.vinisolon.fullstackcourse.domain.Produto;
+import com.vinisolon.fullstackcourse.dto.ProdutoDTO;
 import com.vinisolon.fullstackcourse.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,17 +18,17 @@ public class ProdutoResource {
     private ProdutoService produtoService;
 
     @GetMapping
-    public ResponseEntity<List<?>> findAllProdutos() {
+    public ResponseEntity<List<Produto>> findAllProdutos() {
         return ResponseEntity.ok().body(produtoService.findAllProdutos());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> findProdutoById(@PathVariable Long id) {
+    public ResponseEntity<Produto> findProdutoById(@PathVariable Long id) {
         return ResponseEntity.ok().body(produtoService.findProdutoById(id));
     }
 
     @GetMapping(value = "/paged")
-    public ResponseEntity<Page<?>> searchProdutosPaged(
+    public ResponseEntity<Page<ProdutoDTO>> searchProdutosPaged(
             @RequestParam(value = "nome", defaultValue = "") String nome,
             @RequestParam(value = "categorias", defaultValue = "") List<Long> idsCategorias,
             @RequestParam(value = "page", defaultValue = "0") Integer page,

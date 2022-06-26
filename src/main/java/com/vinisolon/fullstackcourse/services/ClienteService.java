@@ -30,7 +30,7 @@ public class ClienteService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    public List<?> findAllClientes() {
+    public List<ClienteDTO> findAllClientes() {
         return clienteRepository.findAll()
                 .stream()
                 .map(ClienteDTO::new)
@@ -65,7 +65,7 @@ public class ClienteService {
         }
     }
 
-    public Page<?> findAllClientesPaged(Integer page, Integer pageSize, String direction, String orderBy) {
+    public Page<ClienteDTO> findAllClientesPaged(Integer page, Integer pageSize, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, pageSize, Sort.Direction.valueOf(direction), orderBy);
         return clienteRepository.findAll(pageRequest).map(ClienteDTO::new);
     }
