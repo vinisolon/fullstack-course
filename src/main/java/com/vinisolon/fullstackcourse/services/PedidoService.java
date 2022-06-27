@@ -62,7 +62,7 @@ public class PedidoService {
                 pedido.getCliente().getDocumento(),
                 pedido.getId(),
                 pedido.getDataRealizacao(),
-                pedido.getValorTotalPedido()
+                pedido.getValorTotal()
         );
 
         for (ItemPedido item : pedido.getItens())
@@ -102,7 +102,8 @@ public class PedidoService {
         pagamentoRepository.save(pedido2Insert.getPagamento());
         itemPedidoRepository.saveAll(pedido2Insert.getItens());
 
-        emailService.sendOrderConfirmationEmail(pedidoCreated);
+//        emailService.sendOrderConfirmationEmail(pedidoCreated);
+        emailService.sendOrderConfirmationHtmlEmail(pedidoCreated);
 
         return pedidoCreated;
     }
